@@ -75,6 +75,12 @@ cd client
 npm run build  # Output: client/dist/
 ```
 
+## Running Tests
+
+```bash
+uv run --project server pytest tests/backend -q
+```
+
 ## Platform Notes
 
 **macOS/Linux:** The one-command startup script (`./scripts/start.sh`) and stop script (`./scripts/stop.sh`) work out of the box.
