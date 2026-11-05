@@ -31,6 +31,13 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      # Pre-install backend dependencies so the review can run the test suite
+      - name: Install backend dependencies
+        run: uv sync --project server
+
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@v1
@@ -39,7 +46,10 @@ jobs:
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
           prompt: '/code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
-          claude_args: '--allowedTools "mcp__github_inline_comment__create_inline_comment"'
+          # The review may run only the backend test command, nothing else
+          claude_args: >-
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(uv run --project server pytest:*)"
+            --append-system-prompt "Before reviewing, run the backend tests with: uv run --project server pytest tests/backend -q. Report every failing test as a finding, and state the passed and failed counts in the review summary."
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
 
