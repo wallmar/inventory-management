@@ -54,6 +54,8 @@ npm install && npm run dev
 - `GET /api/dashboard/summary` - All filters
 - `GET /api/demand`, `/api/backlog` - No filters
 - `GET /api/spending/*` - Summary, monthly, categories, transactions
+- `GET /api/restocking/candidates` - Filter: category. Forecast-based restock lines, most urgent first
+- `GET /api/restocking/orders`, `POST /api/restocking/orders` - Submitted restocking orders (in-memory, server-side pricing, budget-checked)
 
 ## Common Issues
 1. Use unique keys in v-for (not `index`) - use `sku`, `month`, etc.
@@ -61,6 +63,9 @@ npm install && npm run dev
 3. Update Pydantic models when changing JSON data structure
 4. Inventory filters don't support month (no time dimension)
 5. Revenue goals: $800K/month single, $9.6M YTD all months
+
+## Coding Conventions
+- Always document non-obvious logic changes with comments
 
 ## File Locations
 - Views: `client/src/views/*.vue`

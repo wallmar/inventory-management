@@ -94,6 +94,24 @@ export const api = {
     return response.data
   },
 
+  async getRestockingCandidates(filters = {}) {
+    const params = new URLSearchParams()
+    if (filters.category && filters.category !== 'all') params.append('category', filters.category)
+
+    const response = await axios.get(`${API_BASE_URL}/restocking/candidates?${params.toString()}`)
+    return response.data
+  },
+
+  async getRestockingOrders() {
+    const response = await axios.get(`${API_BASE_URL}/restocking/orders`)
+    return response.data
+  },
+
+  async createRestockingOrder(orderData) {
+    const response = await axios.post(`${API_BASE_URL}/restocking/orders`, orderData)
+    return response.data
+  },
+
   async createPurchaseOrder(purchaseOrderData) {
     const response = await axios.post(`${API_BASE_URL}/purchase-orders`, purchaseOrderData)
     return response.data
