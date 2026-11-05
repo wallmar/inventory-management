@@ -6,6 +6,7 @@ export default {
     orders: 'Orders',
     finance: 'Finance',
     demandForecast: 'Demand Forecast',
+    restocking: 'Restocking',
     companyName: 'Catalyst Components',
     subtitle: 'Inventory Management System'
   },
@@ -112,6 +113,12 @@ export default {
     onTimeDelivery: 'On-Time Delivery',
     itemsCount: '{count} items',
     quantity: 'Qty',
+    submittedOrders: 'Submitted Restocking Orders',
+    noSubmittedOrders: 'No restocking orders submitted yet.',
+    leadTime: 'Lead Time',
+    totalCost: 'Total Cost',
+    createdDate: 'Submitted',
+    daysValue: '{days} days',
     table: {
       orderNumber: 'Order Number',
       orderId: 'Order ID',
@@ -185,6 +192,41 @@ export default {
       change: 'Change',
       trend: 'Trend',
       period: 'Period'
+    }
+  },
+
+  // Restocking
+  restocking: {
+    title: 'Restocking',
+    description: 'Recommend restock orders from demand forecasts within your budget',
+    budget: 'Budget',
+    budgetHint: 'Items are added in priority order until the budget is used up.',
+    selectedCost: 'Selected Cost',
+    itemsSelected: 'Items Selected',
+    maxLeadTime: 'Longest Lead Time',
+    remaining: '{amount} remaining',
+    recommendations: 'Recommendations',
+    included: 'Included',
+    overBudget: 'Over budget',
+    placeOrder: 'Place Order',
+    placing: 'Placing order...',
+    orderPlaced: 'Order {number} submitted. Expected delivery {date}.',
+    viewOrders: 'View in Orders',
+    noCandidates: 'No items need restocking for the current filters.',
+    noSelection: 'Raise the budget to include at least one item.',
+    loadError: 'Failed to load restocking recommendations',
+    table: {
+      sku: 'SKU',
+      itemName: 'Item Name',
+      category: 'Category',
+      trend: 'Trend',
+      onHand: 'On Hand',
+      forecast: 'Forecast',
+      quantity: 'Restock Qty',
+      unitCost: 'Unit Cost',
+      lineCost: 'Line Cost',
+      leadTime: 'Lead Time',
+      status: 'Status'
     }
   },
 
