@@ -134,6 +134,16 @@ class TestRestockingOrdersEndpoints:
         assert "exceeds budget" in response.json()["detail"]
         assert client.get("/api/restocking/orders").json() == []
 
+    def test_create_restocking_order_budget_equal_to_total(self, client):
+        """Test a budget exactly equal to the total is accepted, also when given with sub-cent precision."""
+        for budget in (375.0, 374.999):
+            response = client.post("/api/restocking/orders", json={
+                "budget": budget,
+                "items": [{"item_sku": "GSK-203", "quantity": 100}],
+            })
+            assert response.status_code == 201
+            assert abs(response.json()["total_cost"] - 375.0) < 0.01
+
     def test_create_restocking_order_duplicate_sku(self, client):
         """Test the same SKU twice in one order is rejected."""
         response = client.post("/api/restocking/orders", json={

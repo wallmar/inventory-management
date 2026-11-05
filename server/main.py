@@ -311,7 +311,8 @@ def create_restocking_order(request: CreateRestockingOrderRequest):
         })
 
     total_cost = round(sum(item['line_cost'] for item in lines), 2)
-    if total_cost > request.budget:
+    # Compare in whole cents so sub-cent budgets (e.g. 99.999) behave like their displayed value
+    if round(total_cost * 100) > round(request.budget * 100):
         raise HTTPException(
             status_code=400,
             detail=f"Order total {total_cost:.2f} exceeds budget {request.budget:.2f}",
